@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { SidebarService } from '../../services/sidebar.service';
+
+declare const $: any;
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +9,22 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit, AfterViewInit {
+
+  public menuItems: any[] = []
+
+  constructor(
+    private sidebarService: SidebarService
+  ) {
+    this.menuItems = sidebarService.menu
+  }
+
+  ngAfterViewInit(): void {
+    $('#sidebarnav').AdminMenu()
+  }
+
+  ngOnInit(): void {
+    console.log($)
+  }
 
 }
